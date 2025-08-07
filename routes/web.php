@@ -6,6 +6,7 @@ use App\Livewire\AdminLocationsLivewireComponent;
 use App\Livewire\AdminOrdersLivewireComponent;
 use App\Livewire\AdminSchedulesLivewireComponent;
 use App\Livewire\AdminTeamLivewireComponent;
+use App\Livewire\AdminActivityLogsLivewireComponent;
 use App\Livewire\ClientDashboardLivewireComponent;
 use App\Livewire\ClientLocationsLivewireComponent;
 use App\Livewire\ClientOrdersLivewireComponent;
@@ -34,5 +35,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('schedules', AdminSchedulesLivewireComponent::class)->name('schedules');
     Route::get('locations', AdminLocationsLivewireComponent::class)->name('locations');
     Route::get('team', AdminTeamLivewireComponent::class)->name('team');
+    Route::get('activity-logs', AdminActivityLogsLivewireComponent::class)->name('activity-logs');
 });
 

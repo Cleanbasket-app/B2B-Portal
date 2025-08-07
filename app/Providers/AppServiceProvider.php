@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Client;
+use App\Models\Location;
+use App\Models\Order;
+use App\Models\Schedule;
+use App\Models\User;
+use App\Observers\ActivityLogObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Client::observe(ActivityLogObserver::class);
+        Location::observe(ActivityLogObserver::class);
+        Order::observe(ActivityLogObserver::class);
+        Schedule::observe(ActivityLogObserver::class);
+        User::observe(ActivityLogObserver::class);
     }
 }

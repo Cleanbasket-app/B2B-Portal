@@ -6,6 +6,7 @@
         <a href="{{ route('admin.schedules') }}">Schedules</a>
         <a href="{{ route('admin.locations') }}">Locations</a>
         <a href="{{ route('admin.team') }}">Team</a>
+        <a href="{{ route('admin.activity-logs') }}">Activity Logs</a>
     </nav>
 
     <div class="metrics">
