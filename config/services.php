@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'vonage' => [
+        'key' => env('VONAGE_KEY'),
+        'secret' => env('VONAGE_SECRET'),
+        'sms_from' => env('VONAGE_SMS_FROM'),
+        'test_number' => env('VONAGE_TEST_NUMBER'),
+    ],
+
 ];

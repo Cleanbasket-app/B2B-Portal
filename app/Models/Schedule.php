@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ScheduleUpdated;
 
 class Schedule extends Model
 {
@@ -19,6 +21,18 @@ class Schedule extends Model
     protected $casts = [
         'scheduled_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        static::updated(function (Schedule $schedule) {
+            $notification = new ScheduleUpdated($schedule);
+            Notification::send($schedule->client->users, $notification);
+
+            if ($phone = config('services.vonage.test_number')) {
+                Notification::route('vonage', $phone)->notify($notification);
+            }
+        });
+    }
 
     /**
      * Get the client that owns the schedule.
