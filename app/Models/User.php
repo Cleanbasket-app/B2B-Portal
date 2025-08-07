@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -46,5 +47,13 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => \App\Enums\UserRole::class,
         ];
+    }
+
+    /**
+     * The clients that belong to the user.
+     */
+    public function clients(): BelongsToMany
+    {
+        return $this->belongsToMany(Client::class);
     }
 }
