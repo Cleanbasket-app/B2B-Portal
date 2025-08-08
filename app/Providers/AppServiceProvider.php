@@ -4,6 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Client;
+use App\Models\Location;
+use App\Models\Order;
+use App\Models\Schedule;
+use App\Models\User;
+use App\Observers\ActivityLogObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +26,3 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        App::setLocale(config('app.locale'));
-    }
-}
