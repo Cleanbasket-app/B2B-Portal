@@ -26,12 +26,3 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        App::setLocale(config('app.locale'));
-
-        Client::observe(ActivityLogObserver::class);
-        Location::observe(ActivityLogObserver::class);
-        Order::observe(ActivityLogObserver::class);
-        Schedule::observe(ActivityLogObserver::class);
-        User::observe(ActivityLogObserver::class);
-    }
-}

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OrderCreated;
 
 class Order extends Model
 {
@@ -17,6 +19,18 @@ class Order extends Model
         'description',
         'status',
     ];
+
+    protected static function booted(): void
+    {
+        static::created(function (Order $order) {
+            $notification = new OrderCreated($order);
+            Notification::send($order->client->users, $notification);
+
+            if ($phone = config('services.vonage.test_number')) {
+                Notification::route('vonage', $phone)->notify($notification);
+            }
+        });
+    }
 
     /**
      * Get the client that owns the order.
