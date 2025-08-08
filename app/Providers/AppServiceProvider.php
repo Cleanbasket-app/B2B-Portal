@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Client;
 use App\Models\Location;
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        App::setLocale(config('app.locale'));
+
         Client::observe(ActivityLogObserver::class);
         Location::observe(ActivityLogObserver::class);
         Order::observe(ActivityLogObserver::class);
